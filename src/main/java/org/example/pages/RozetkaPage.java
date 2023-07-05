@@ -47,4 +47,9 @@ public class RozetkaPage extends BasePage {
     public void ensureOpened() {
         waitUntilElementIsVisible(driver, elLogInCta);
     }
+
+    public void setFirstName(String firstName) {
+        waitUntilElementIsVisible(driver, elFirstNameInput);
+        elFirstNameInput.sendKeys(firstName);
+    }
 }

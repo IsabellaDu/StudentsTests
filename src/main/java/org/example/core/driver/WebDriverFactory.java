@@ -5,9 +5,13 @@ import org.example.core.Browsers;
 import org.example.utils.ConfigProvider;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class WebDriverFactory {
     private static final String BROWSER = System.getProperty("browser");
@@ -34,6 +38,11 @@ public class WebDriverFactory {
     }
 
     public static WebDriver getChromeDriver() {
+        /*Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("profile.default_content_setting_values.notifications", 2);
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("prefs", prefs);*/
+
         if (driver == null) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
