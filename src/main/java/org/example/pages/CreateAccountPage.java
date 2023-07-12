@@ -1,12 +1,15 @@
 package org.example.pages;
 
 import lombok.Getter;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import static org.example.core.CommonPageMethods.emailPatternMatches;
+import static org.example.core.CommonPageMethods.passwordPatternMatches;
 import static org.example.utils.WaitUtils.waitUntilElementIsVisible;
 
 public class CreateAccountPage extends BasePage {
@@ -61,7 +64,7 @@ public class CreateAccountPage extends BasePage {
 
     public void setFirstName(String firstName) {
         waitUntilElementIsVisible(driver, elFirstNameInput);
-        elFirstNameInput.sendKeys(firstName);
+        elFirstNameInput.sendKeys(firstName, Keys.ENTER);
     }
 
     public void setLastName(String lastName) {
@@ -92,7 +95,60 @@ public class CreateAccountPage extends BasePage {
         }
     }
 
-    public void checkAllErrorFields(String firstName) {
-        checkFirstNameError(firstName);
+    public void checkLastNameError(String lastName) {
+        if (lastName.isEmpty()) {
+            waitUntilElementIsVisible(driver, elLastnameError);
+            Assert.assertEquals(elLastnameError.getText(), "This is a required field.",
+                    "expected lastname error message doesn't match actual message");
+        }
     }
+
+    public void checkEmailError(String email) {
+        if (email.isEmpty()) {
+            waitUntilElementIsVisible(driver, elEmailError);
+            Assert.assertEquals(elEmailError.getText(), "This is a required field.",
+                    "expected email error message doesn't match actual message");
+        } else if (!emailPatternMatches(email)) {
+            waitUntilElementIsVisible(driver, elEmailError);
+            Assert.assertEquals(elEmailError.getText(), "Please enter a valid email address (Ex: johndoe@domain.com).",
+                    "expected email error message doesn't match actual message");
+        }
+    }
+
+    public void checkPasswordError(String password) {
+        if (password.isEmpty()) {
+            waitUntilElementIsVisible(driver, elPasswordError);
+            Assert.assertEquals(elPasswordError.getText(), "This is a required field.",
+                    "expected password error message doesn't match actual message");
+        } else if (password.length() < 8) {
+            waitUntilElementIsVisible(driver, elPasswordError);
+            Assert.assertEquals(elPasswordError.getText(), "Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.",
+                    "expected password error message doesn't match actual message");
+        } else if (!passwordPatternMatches(password)) {
+            waitUntilElementIsVisible(driver, elPasswordError);
+            Assert.assertEquals(elPasswordError.getText(), "Minimum of different classes of characters in password is 3. Classes of characters: Lower Case, Upper Case, Digits, Special Characters.",
+                    "expected password error message doesn't match actual message");
+        }
+    }
+
+    public void checkConfirmPasswordError(String password, String confirmPassword) {
+        if (confirmPassword.isEmpty()) {
+            waitUntilElementIsVisible(driver, elPasswordConfirmationError);
+            Assert.assertEquals(elPasswordConfirmationError.getText(), "This is a required field.",
+                    "expected password error message doesn't match actual message");
+        } else if (!confirmPassword.equals(password)) {
+            waitUntilElementIsVisible(driver, elPasswordConfirmationError);
+            Assert.assertEquals(elPasswordConfirmationError.getText(), "Please enter the same value again.",
+                    "expected password error message doesn't match actual message");
+        }
+    }
+
+    public void checkAllErrorFields(String firstName, String lastName, String email, String password, String confirmPassword) {
+        checkFirstNameError(firstName);
+        checkLastNameError(lastName);
+        checkEmailError(email);
+        checkPasswordError(password);
+        checkConfirmPasswordError(password, confirmPassword);
+    }
+
 }

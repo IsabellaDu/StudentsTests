@@ -16,6 +16,6 @@ public class CreateAccountTest extends BaseTest {
         createAccountPage.setConfirmPassword(confirmPassword);
         createAccountPage.getElCreateAccountCta().click();
 
-        createAccountPage.checkAllErrorFields(firstName);
+        createAccountPage.checkAllErrorFields(firstName, lastName, email, password, confirmPassword);
     }
 }
