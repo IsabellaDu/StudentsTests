@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Practice Suite">
-    <packages>
+    <!--<packages>
         <package name="testNg"></package>
     </packages>
     <test name="TestNgTest">
@@ -10,5 +10,10 @@
             <define name="smoke"></define>
             <define name="regression"></define>
         </groups>
+    </test>-->
+    <test name="Regression">
+        <classes>
+            <class name="testNg.CoolBlueTest"/>
+        </classes>
     </test>
 </suite>

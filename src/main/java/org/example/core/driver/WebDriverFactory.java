@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.opera.OperaDriver;
+
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.HashMap;
@@ -30,8 +30,8 @@ public class WebDriverFactory {
                 return getSafariDriver();
             case FIREFOX:
                 return getFirefoxDriver();
-            case OPERA:
-                return getOperaDriver();
+           /* case OPERA:
+                return getOperaDriver();*/
             default:
                 throw new IllegalArgumentException("Wrong browser was chosen");
         }
@@ -44,7 +44,9 @@ public class WebDriverFactory {
         options.setExperimentalOption("prefs", prefs);*/
 
         if (driver == null) {
-            WebDriverManager.chromedriver().setup();
+            WebDriverManager.chromedriver().clearDriverCache().setup();
+            WebDriverManager.chromedriver().clearResolutionCache().setup();
+            //WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         }
         return driver;
@@ -66,11 +68,11 @@ public class WebDriverFactory {
         return driver;
     }
 
-    public static WebDriver getOperaDriver() {
+    /*public static WebDriver getOperaDriver() {
         if (driver == null) {
             WebDriverManager.operadriver().setup();
             driver = new OperaDriver();
         }
         return driver;
-    }
+    }*/
 }

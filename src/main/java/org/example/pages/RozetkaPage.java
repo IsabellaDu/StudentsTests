@@ -10,6 +10,10 @@ import static org.example.utils.WaitUtils.waitUntilElementIsVisible;
 
 public class RozetkaPage extends BasePage {
     private final String ROZETKA_PAGE_URL = "https://rozetka.com.ua/";
+
+    @Getter
+    @FindBy(xpath = "//div[@class='search-form__inner']//input[@name='search']")
+    private WebElement elSearchInput;
     @Getter
     @FindBy(xpath = "//div[@class='header-layout']//ul[@class='header-actions']//li[@class='header-actions__item header-actions__item--user']//button")
     private WebElement elLogInCta;

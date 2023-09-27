@@ -1,0 +1,3 @@
+name: Izabella
+age: 25
+hobby: hiking
