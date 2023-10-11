@@ -20,6 +20,14 @@ public class CoolBlueHomePage extends BasePage {
     @FindBy(xpath = "//div[@class='pb--2 pb--0@sm section--4 section--6@sm']//button[@class='button button--order button--full-width']")
     private WebElement elCookiesNotificationCta;
 
+    @Getter
+    @FindBy(xpath = "//input[@id='search_query']")
+    private WebElement elSearchItemInput;
+
+    @Getter
+    @FindBy(xpath = "//div[@class='content-card-from-size-m']//div[@class='section--6'][1]")
+    private WebElement elTryAgainText;
+
     public CoolBlueHomePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

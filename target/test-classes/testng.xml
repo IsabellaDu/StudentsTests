@@ -13,7 +13,8 @@
     </test>-->
     <test name="Regression">
         <classes>
-            <class name="testNg.CoolBlueTest"/>
+            <!--<class name="testNg.CoolBlueTest"/>-->
+            <class name="cucumber.CucumberTestRunner"></class>
         </classes>
     </test>
 </suite>
